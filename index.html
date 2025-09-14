@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kevin Fele | Hacker Portfolio</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html { height: 100%; font-family: 'Courier New', monospace; background: #0d0d0d; color: #00ff99; overflow-x: hidden; }
+    a { text-decoration: none; color: #00ff99; }
+    header, section, footer { padding: 3rem 1rem; max-width: 1000px; margin: auto; position: relative; z-index: 1; }
+
+    /* Loading Bar */
+    #loadingBarContainer { position: fixed; top: 0; left: 0; width: 100%; height: 6px; background: #111; z-index: 2; }
+    #loadingBar { width: 0; height: 100%; background: #00ff99; transition: width 0.1s linear; }
+
+    /* Header */
+    header { text-align: center; border-bottom: 2px solid #00ff99; }
+    header h1 { font-size: 3rem; text-shadow: 0 0 5px #00ff99; }
+    header p { font-style: italic; color: #33ffaa; margin-bottom: 1rem; }
+    nav ul { display: flex; justify-content: center; list-style: none; gap: 2rem; margin-top: 1rem; }
+    nav ul li a { padding: 0.5rem 1rem; transition: 0.3s; border: 1px solid #00ff99; border-radius: 5px; }
+    nav ul li a:hover { background: #00ff99; color: #0d0d0d; }
+
+    /* Sections */
+    section { margin-top: 3rem; }
+    h2 { font-size: 2rem; color: #00ff99; margin-bottom: 1rem; text-shadow: 0 0 5px #00ff99; }
+
+    /* About Me */
+    article { max-width: 800px; margin: auto; }
+    article h3 { color: #33ffaa; margin-top: 1.5rem; }
+    article ul { margin-left: 1.5rem; margin-top: 0.5rem; }
+    article ul li { margin-bottom: 0.5rem; }
+
+    /* Latest Updates */
+    #updates { display: flex; flex-direction: column; gap: 1.5rem; }
+    .update { border: 1px solid #00ff99; padding: 1rem; border-radius: 8px; background: #111; transition: transform 0.3s, box-shadow 0.3s; }
+    .update:hover { transform: scale(1.02); box-shadow: 0 0 20px #00ff99; }
+
+    /* Skills */
+    #skills ul { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    #skills li { background: #00ff99; color: #0d0d0d; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; }
+
+    /* Contact */
+    form { display: flex; flex-direction: column; gap: 1rem; max-width: 500px; margin: auto; }
+    input, textarea { padding: 0.5rem; border-radius: 5px; border: 1px solid #00ff99; background: #111; color: #00ff99; }
+    input:focus, textarea:focus { outline: none; box-shadow: 0 0 5px #00ff99; }
+    button { padding: 0.7rem; border: none; border-radius: 5px; background: #00ff99; color: #0d0d0d; cursor: pointer; font-weight: bold; transition: 0.3s; }
+    button:hover { background: #33ffaa; }
+    #sendingMessage { text-align: center; color: #ff0; font-weight: bold; margin-top: 1rem; display: none; }
+
+    /* Footer */
+    footer { text-align: center; margin-top: 2rem; border-top: 2px solid #00ff99; padding-top: 1rem; }
+
+    /* Canvas full-screen behind content */
+    #matrixCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+</style>
+</head>
+<body>
+
+<!-- Loading Bar -->
+<div id="loadingBarContainer"><div id="loadingBar"></div></div>
+
+<canvas id="matrixCanvas"></canvas>
+
+<header>
+    <h1>Kevin Fele</h1>
+    <p>Digital Nomad | Cyber Explorer | Code Alchemist</p>
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#updates">Latest Updates</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- About Me -->
+<section id="about">
+    <h2>About Me</h2>
+    <article>
+        <h3>Early Interests</h3>
+        <p>I will start by saying photography, because I really liked it. Equipment was expensive, so I shifted to tech. I loved exploring computers and even bypassing things for fun (all legal!).</p>
+
+        <h3>Education</h3>
+        <p>I went back to school to study <strong>BSc in Applied Mathematics and Computer Science</strong>. My favorite module is <strong>Calculus 3</strong>—triple integrals and vectors are amazing.</p>
+
+        <h3>Programming Skills</h3>
+        <p>Fluent in <strong>C++</strong>, some Python, and a bit of Assembly (talking directly to the CPU is scary and fun!).</p>
+
+        <h3>Professional Journey</h3>
+        <p>I aspire to become a <strong>Quant</strong>. Quants use math and programming to understand financial markets, build models, and help make smart investments.</p>
+
+        <h3>Did You Know?</h3>
+        <ul>
+            <li>Anything divided by zero is <strong>undefined</strong>, because no number multiplied by zero gives a non-zero result. I aspire to understand math while exploring technology.</li>
+        </ul>
+    </article>
+</section>
+
+<!-- Latest Updates Section -->
+<section id="updates">
+    <h2>Latest Updates</h2>
+    <div id="updatesContainer"></div>
+</section>
+
+<section id="skills">
+    <h2>Skills & Interests</h2>
+    <ul>
+        <li>C++ & Python</li>
+        <li>Web Development</li>
+        <li>Cybersecurity</li>
+        <li>Terminal Hacking Fun</li>
+        <li>AI & Automation</li>
+    </ul>
+</section>
+
+<section id="contact">
+    <h2>Contact Me</h2>
+    <form id="contactForm">
+        <input type="text" name="user_name" placeholder="Your Name" required>
+        <input type="email" name="user_email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+    <div id="sendingMessage">Sending message... 💻</div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Kevin Fele | All Rights Reserved</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+    // Initialize EmailJS
+    emailjs.init("Kevin"); // User ID
+
+    const form = document.getElementById('contactForm');
+    const sendingMessage = document.getElementById('sendingMessage');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        sendingMessage.style.display = 'block'; // Show sending animation
+
+        emailjs.sendForm('service_793u5z8', 'template_uv090o9', this)
+            .then(() => {
+                sendingMessage.style.display = 'none';
+                alert('Message sent successfully! ✅');
+                this.reset();
+            }, (err) => {
+                sendingMessage.style.display = 'none';
+                alert('Failed to send message. ❌');
+                console.error('EmailJS error:', err);
+            });
+    });
+
+    // Scroll-linked Loading Bar
+    const loadingBar = document.getElementById('loadingBar');
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        loadingBar.style.width = scrollPercent + '%';
+    });
+
+    // Matrix effect
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = "01";
+    const fontSize = 18;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(0);
+
+    function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#00ff99";
+        ctx.font = fontSize + "px Courier New";
+
+        for(let i = 0; i < drops.length; i++) {
+            const text = letters[Math.floor(Math.random() * letters.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+        }
+    }
+    setInterval(draw, 50);
+
+    // Latest Updates
+    const updates = [
+        "YouTube AI tool now edits videos automatically!",
+        "iPhone 17 dropped: Critics say it's amazing 🔥",
+        "Trending tech job opportunities in AI and cybersecurity."
+    ];
+    const updatesContainer = document.getElementById('updatesContainer');
+    updates.forEach(update => {
+        const div = document.createElement('div');
+        div.className = 'update';
+        div.textContent = update;
+        updatesContainer.appendChild(div);
+    });
+</script>
+</body>
+</html>
