@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request a Quote | FactorX Studios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <span class="factorx">Factor</span> Studios
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Our Services</a></li>
+                <li><a href="quote.html" class="active">Request a Quote</a></li>
+                <li><a href="portfolio.html">Our Work</a></li>
+                <li><a href="about.html">About us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="articles.html">Articles</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Request a Quote</h1>
+            <p>Get a custom quote tailored to your specific requirements</p>
+        </div>
+    </section>
+
+    <!-- Quick Package Selection -->
+    <section class="mini-packages">
+        <div class="container">
+            <div class="section-title">
+                <h2>Quick Package Selection</h2>
+                <p style="margin-top: 20px; color: var(--dark-gray);">Click on a package to pre-fill the quote form</p>
+            </div>
+            <div class="packages-grid">
+                <div class="package-card" onclick="selectPackage('Starter Package', 'R4950')">
+                    <div class="package-header">
+                        <h3 class="package-name">STARTER PACKAGE</h3>
+                        <div class="package-price">from R4950</div>
+                    </div>
+                    <div class="package-features">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>2 - 3 Pages</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Responsive Design</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>CMS Included</span>
+                        </div>
+                    </div>
+                    <div class="package-cta">
+                        <div class="btn">Select This Package</div>
+                    </div>
+                </div>
+
+                <div class="package-card" onclick="selectPackage('Business Website', 'R12800')">
+                    <div class="package-header">
+                        <h3 class="package-name">BUSINESS WEBSITE</h3>
+                        <div class="package-price">from R12,800</div>
+                    </div>
+                    <div class="package-features">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>13 Pages</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Advanced Features</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Premium Support</span>
+                        </div>
+                    </div>
+                    <div class="package-cta">
+                        <div class="btn">Select This Package</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Form -->
+    <section class="business-packages">
+        <div class="container">
+            <div class="section-title">
+                <h2>Custom Quote Request</h2>
+            </div>
+            <div class="form-container">
+                <form id="quoteForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="package">Package Interest</label>
+                        <select id="package" name="package">
+                            <option value="">Select a package</option>
+                            <option value="Starter Package">Starter Package (from R4950)</option>
+                            <option value="Starter Pro">Starter Pro (from R5900)</option>
+                            <option value="Start-up Business">Start-up Business (from R7800)</option>
+                            <option value="Small Business">Small Business (from R10650)</option>
+                            <option value="Business Website">Business Website (from R14450)</option>
+                            <option value="Advanced Business">Advanced Business (from R19200)</option>
+                            <option value="Custom">Custom Solution</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="budget">Budget Range</label>
+                        <select id="budget" name="budget">
+                            <option value="">Select budget range</option>
+                            <option value="R5,000 - R10,000">R5,000 - R10,000</option>
+                            <option value="R10,000 - R20,000">R10,000 - R20,000</option>
+                            <option value="R20,000 - R50,000">R20,000 - R50,000</option>
+                            <option value="R50,000+">R50,000+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Project Details *</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Tell us about your project requirements, timeline, and any specific features you need..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-whatsapp" style="width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Send Quote Request via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo"><span class="factorx">Factor</span> Studios</div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="services.html">Our Services</a>
+                    <a href="quote.html">Request a Quote</a>
+                    <a href="portfolio.html">Our Work</a>
+                    <a href="about.html">About us</a>
+                    <a href="contact.html">Contact Us</a>
+                    <a href="articles.html">Articles</a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 <span class="factorx">Factor</span> Studios. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
