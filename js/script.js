@@ -1,19 +1,45 @@
-// Mobile Menu Toggle
+// Mobile Menu Toggle and Navigation
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileNav = document.querySelector('.mobile-nav');
     const navLinks = document.querySelector('.nav-links');
     
-    if (mobileMenu && navLinks) {
+    // Mobile menu toggle
+    if (mobileMenu && mobileNav) {
         mobileMenu.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            // Toggle menu icon
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         });
         
         // Close mobile menu when clicking on a link
-        const navItems = document.querySelectorAll('.nav-links a');
-        navItems.forEach(item => {
+        const mobileNavItems = document.querySelectorAll('.mobile-nav-links a');
+        mobileNavItems.forEach(item => {
             item.addEventListener('click', () => {
-                navLinks.classList.remove('active');
+                mobileNav.classList.remove('active');
+                const icon = mobileMenu.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.nav-container') && !event.target.closest('.mobile-nav')) {
+                mobileNav.classList.remove('active');
+                const icon = mobileMenu.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
         });
     }
     
@@ -48,7 +74,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, { threshold: 0.1 });
+        }, { 
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
         
         elements.forEach(element => {
             element.style.opacity = '0';
@@ -67,6 +96,16 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
+                // Close mobile menu if open
+                if (mobileNav && mobileNav.classList.contains('active')) {
+                    mobileNav.classList.remove('active');
+                    const icon = mobileMenu.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
+                
                 target.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
@@ -98,6 +137,16 @@ document.addEventListener('DOMContentLoaded', function() {
             window.open(`https://wa.me/27780391848?text=${message}`, '_blank');
         });
     }
+    
+    // Handle window resize
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            // Re-initialize animations on resize
+            animateOnScroll();
+        }, 250);
+    });
 });
 
 // Package selection for quote form
@@ -119,5 +168,14 @@ function selectPackage(packageName, packagePrice) {
         } else {
             budgetSelect.value = 'R20,000+';
         }
+    }
+    
+    // Scroll to form
+    const formSection = document.querySelector('.form-container');
+    if (formSection) {
+        formSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
     }
 }
