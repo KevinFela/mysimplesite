@@ -1,5 +1,16 @@
 // Mobile Menu Toggle and Navigation
 document.addEventListener('DOMContentLoaded', function() {
+    // Remove index.html from URL if present
+    if (window.location.pathname.endsWith('index.html')) {
+        const cleanUrl = window.location.origin + '/';
+        window.history.replaceState({}, document.title, cleanUrl);
+        
+        // Force redirect if directly accessed
+        if (window.location.pathname === '/index.html') {
+            window.location.replace(cleanUrl);
+        }
+    }
+    
     const mobileMenu = document.querySelector('.mobile-menu');
     const mobileNav = document.querySelector('.mobile-nav');
     const navLinks = document.querySelector('.nav-links');
