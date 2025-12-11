@@ -54,7 +54,7 @@ header {
 
 /* Logo Styles */
 .logo {
-    margin-left: 15px; /* Move logo to the right */
+    margin-left: 15px;
 }
 
 .logo-img {
@@ -67,7 +67,6 @@ header {
     transform: scale(1.05);
 }
 
-/* Fallback for logo if image doesn't load */
 .logo-text {
     font-size: 1.6rem;
     font-weight: 700;
@@ -276,6 +275,244 @@ header {
 .hero-img:hover {
     transform: translateY(-5px);
     box-shadow: 15px 15px 0 var(--text);
+}
+
+/* Industrial Terminal Graphic Styles */
+.industrial-terminal-graphic {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: var(--light-gray);
+    border: 3px solid var(--text);
+    overflow: hidden;
+    box-shadow: 10px 10px 0 var(--text);
+    border-radius: 4px;
+}
+
+/* Structural X */
+.structural-x {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    z-index: 2;
+}
+
+.x-beam-1, .x-beam-2 {
+    position: absolute;
+    background-color: var(--text);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(37, 211, 102, 0.3);
+}
+
+.x-beam-1 {
+    width: 100%;
+    height: 15px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    background: linear-gradient(90deg, transparent, var(--text), transparent);
+}
+
+.x-beam-2 {
+    width: 100%;
+    height: 15px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+    background: linear-gradient(90deg, transparent, var(--text), transparent);
+}
+
+/* Rivets */
+.rivet {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: var(--text);
+    border-radius: 50%;
+    border: 2px solid var(--light-gray);
+    box-shadow: 0 0 8px rgba(37, 211, 102, 0.4);
+}
+
+.rivet-1 { top: 20%; left: 20%; }
+.rivet-2 { top: 20%; right: 20%; }
+.rivet-3 { bottom: 20%; left: 20%; }
+.rivet-4 { bottom: 20%; right: 20%; }
+.rivet-5 { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 8px; height: 8px; }
+
+.crosshair-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--text);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(37, 211, 102, 0.5);
+}
+
+/* Scan Lines Effect */
+.scan-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1) 0px,
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    z-index: 1;
+    animation: scan 10s linear infinite;
+}
+
+@keyframes scan {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(20px); }
+}
+
+/* Terminal Overlay */
+.terminal-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background-color: rgba(26, 26, 26, 0.85);
+    border: 1px solid var(--text);
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    z-index: 3;
+}
+
+.command-line {
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.prompt {
+    color: #25D366;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.command {
+    color: var(--white);
+    letter-spacing: 1px;
+}
+
+.cursor {
+    animation: blink 1s infinite;
+    color: #25D366;
+    margin-left: 5px;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.status-line {
+    font-size: 12px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.status-tag {
+    background-color: #25D366;
+    color: var(--text);
+    padding: 2px 6px;
+    margin-right: 10px;
+    font-weight: bold;
+    border-radius: 2px;
+}
+
+.status-text {
+    letter-spacing: 0.5px;
+}
+
+.progress-indicator {
+    width: 100%;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 70%;
+    height: 100%;
+    background-color: #25D366;
+    animation: progress 2s ease-in-out infinite alternate;
+}
+
+@keyframes progress {
+    0% { width: 30%; }
+    100% { width: 90%; }
+}
+
+/* Warning Labels */
+.warning-label {
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 11px;
+    color: var(--text);
+    padding: 3px 8px;
+    border: 2px solid var(--text);
+    background-color: var(--light-gray);
+    z-index: 2;
+    transform: rotate(-15deg);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.warning-1 {
+    top: 30px;
+    left: 30px;
+    transform: rotate(-10deg);
+}
+
+.warning-2 {
+    bottom: 30px;
+    right: 30px;
+    transform: rotate(10deg);
+}
+
+/* Hex Pattern Background */
+.hex-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(37, 211, 102, 0.05) 1px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(37, 211, 102, 0.05) 1px, transparent 2px);
+    background-size: 50px 50px;
+    z-index: 0;
+}
+
+/* Motherboard Trace */
+.motherboard-trace {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    transform: translate(-50%, -50%);
+    background: 
+        linear-gradient(90deg, transparent 49%, rgba(37, 211, 102, 0.1) 50%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, rgba(37, 211, 102, 0.1) 50%, transparent 51%);
+    background-size: 20px 20px;
+    z-index: 0;
+    opacity: 0.5;
 }
 
 .btn {
@@ -925,7 +1162,40 @@ footer {
     }
 }
 
-/* Mobile-specific adjustments */
+/* Responsive adjustments for industrial graphic */
+@media (min-width: 768px) {
+    .industrial-terminal-graphic {
+        height: 450px;
+    }
+    
+    .structural-x {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .x-beam-1, .x-beam-2 {
+        height: 18px;
+    }
+    
+    .rivet {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .command-line {
+        font-size: 16px;
+    }
+    
+    .status-line {
+        font-size: 14px;
+    }
+    
+    .warning-label {
+        font-size: 13px;
+        padding: 4px 10px;
+    }
+}
+
 @media (max-width: 767px) {
     .mobile-menu {
         display: block;
@@ -962,6 +1232,36 @@ footer {
     
     .footer-links a {
         padding: 8px 0;
+    }
+    
+    /* Industrial graphic mobile adjustments */
+    .industrial-terminal-graphic {
+        height: 300px;
+    }
+    
+    .structural-x {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .x-beam-1, .x-beam-2 {
+        height: 10px;
+    }
+    
+    .terminal-overlay {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        padding: 10px;
+    }
+    
+    .command-line {
+        font-size: 12px;
+    }
+    
+    .warning-label {
+        font-size: 9px;
+        padding: 2px 5px;
     }
 }
 
@@ -1025,5 +1325,27 @@ footer {
     
     .contact-methods {
         grid-template-columns: 1fr;
+    }
+    
+    /* Industrial graphic small mobile adjustments */
+    .industrial-terminal-graphic {
+        height: 250px;
+    }
+    
+    .structural-x {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .terminal-overlay {
+        padding: 8px;
+    }
+    
+    .command-line {
+        font-size: 10px;
+    }
+    
+    .status-line {
+        font-size: 10px;
     }
 }
