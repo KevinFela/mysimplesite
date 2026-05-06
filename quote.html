@@ -4,41 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request a Quote | FactorX Studios</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F47J6SVWNN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-F47J6SVWNN');
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container nav-container">
             <a href="/" class="logo">
-                <img src="assets/images/logo.png" alt="FactorX Studios" class="logo-img">
+                <img src="assets/images/logo.png" alt="FactorX Studios" class="logo-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'logo-text\'><strong>FactorX</strong> Studios</span>'">
             </a>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
-                <li><a href="services">Our Services</a></li>
+                <li><a href="services">Services</a></li>
                 <li><a href="hosting">Hosting</a></li>
-                <li><a href="quote" class="active">Request a Quote</a></li>
-                <li><a href="contact">Contact Us</a></li>
+                <li><a href="quote" class="active">Quote</a></li>
+                <li><a href="contact">Contact</a></li>
             </ul>
-            <button class="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button class="mobile-menu"><i class="fas fa-bars"></i></button>
         </div>
-        
-        <!-- Mobile Navigation -->
         <div class="mobile-nav">
             <ul class="mobile-nav-links">
                 <li><a href="/">Home</a></li>
-                <li><a href="services">Our Services</a></li>
+                <li><a href="services">Services</a></li>
                 <li><a href="hosting">Hosting</a></li>
-                <li><a href="quote" class="active">Request a Quote</a></li>
-                <li><a href="contact">Contact Us</a></li>
+                <li><a href="quote">Quote</a></li>
+                <li><a href="contact">Contact</a></li>
             </ul>
         </div>
     </header>
 
-    <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1>Request a Quote</h1>
@@ -47,34 +53,25 @@
     </section>
 
     <!-- Quick Package Selection -->
-    <section class="mini-packages">
+    <section class="mini-packages" style="padding: 60px 0;">
         <div class="container">
             <div class="section-title">
                 <h2>Quick Package Selection</h2>
-                <p style="margin-top: 20px; color: var(--dark-gray);">Click on a package to pre-fill the quote form</p>
+                <p style="margin-top: 16px; color: var(--text-secondary);">Click on a package to pre-fill the quote form</p>
             </div>
             <div class="packages-grid">
                 <div class="package-card" onclick="selectPackage('Starter Package', 'R4950')">
                     <div class="package-header">
                         <h3 class="package-name">STARTER PACKAGE</h3>
-                        <div class="package-price">from R4950</div>
+                        <div class="package-price">from R4,950</div>
                     </div>
                     <div class="package-features">
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>2 - 3 Pages</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Responsive Design</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>CMS Included</span>
-                        </div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> 2 - 3 Pages</div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> Responsive Design</div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> CMS Included</div>
                     </div>
                     <div class="package-cta">
-                        <div class="btn">Select This Package</div>
+                        <div class="btn" style="cursor: pointer;">Select This Package</div>
                     </div>
                 </div>
 
@@ -84,21 +81,12 @@
                         <div class="package-price">from R12,800</div>
                     </div>
                     <div class="package-features">
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>13 Pages</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Advanced Features</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Premium Support</span>
-                        </div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> 13 Pages</div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> Advanced Features</div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> Premium Support</div>
                     </div>
                     <div class="package-cta">
-                        <div class="btn">Select This Package</div>
+                        <div class="btn" style="cursor: pointer;">Select This Package</div>
                     </div>
                 </div>
             </div>
@@ -106,7 +94,7 @@
     </section>
 
     <!-- Quote Form -->
-    <section class="business-packages">
+    <section class="business-packages" style="padding: 60px 0; background: var(--bg-secondary);">
         <div class="container">
             <div class="section-title">
                 <h2>Custom Quote Request</h2>
@@ -132,12 +120,12 @@
                         <label for="package">Package Interest</label>
                         <select id="package" name="package">
                             <option value="">Select a package</option>
-                            <option value="Starter Package">Starter Package (from R4950)</option>
-                            <option value="Starter Pro">Starter Pro (from R5900)</option>
-                            <option value="Start-up Business">Start-up Business (from R7800)</option>
-                            <option value="Small Business">Small Business (from R10650)</option>
-                            <option value="Business Website">Business Website (from R14450)</option>
-                            <option value="Advanced Business">Advanced Business (from R19200)</option>
+                            <option value="Starter Package">Starter Package (from R4,950)</option>
+                            <option value="Starter Pro">Starter Pro (from R5,900)</option>
+                            <option value="Start-up Business">Start-up Business (from R7,800)</option>
+                            <option value="Small Business">Small Business (from R10,650)</option>
+                            <option value="Business Website">Business Website (from R14,450)</option>
+                            <option value="Advanced Business">Advanced Business (from R19,200)</option>
                             <option value="Custom">Custom Solution</option>
                         </select>
                     </div>
@@ -166,23 +154,17 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="assets/images/logo.png" alt="FactorX Studios" class="footer-logo-img">
-                </div>
-                <div class="footer-links">
-                    <a href="/">Home</a>
-                    <a href="services">Our Services</a>
-                    <a href="hosting">Hosting</a>
-                    <a href="quote">Request a Quote</a>
-                    <a href="contact">Contact Us</a>
-                </div>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="services">Services</a>
+                <a href="hosting">Hosting</a>
+                <a href="quote">Quote</a>
+                <a href="contact">Contact</a>
             </div>
             <div class="copyright">
-                &copy; 2025 <span class="factorx">Factor</span> Studios. All rights reserved.
+                &copy; 2025 Kevin Fele — FactorX Studios | BSc (Applied Math & Computer Science)
             </div>
         </div>
     </footer>

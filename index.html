@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FactorX | Kevin Fele</title>
+    <title>FactorX | Kevin Fele — Digital Architecture</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F47J6SVWNN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-F47J6SVWNN');
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
 </head>
@@ -12,250 +23,155 @@
     <header>
         <div class="container nav-container">
             <a href="/" class="logo">
-                <img src="assets/images/logo.png" alt="FactorX Studios" class="logo-img">
+                <img src="assets/images/logo.png" alt="FactorX Studios" class="logo-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'logo-text\'><strong>FactorX</strong> Studios</span>'">
             </a>
             <ul class="nav-links">
                 <li><a href="/" class="active">Home</a></li>
-                <li><a href="services">Our Services</a></li>
+                <li><a href="services">Services</a></li>
                 <li><a href="hosting">Hosting</a></li>
-                <li><a href="quote">Request a Quote</a></li>
-                <li><a href="contact">Contact Us</a></li>
+                <li><a href="quote">Quote</a></li>
+                <li><a href="contact">Contact</a></li>
             </ul>
-            <button class="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button class="mobile-menu"><i class="fas fa-bars"></i></button>
         </div>
-        
         <div class="mobile-nav">
             <ul class="mobile-nav-links">
-                <li><a href="/" class="active">Home</a></li>
-                <li><a href="services">Our Services</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="services">Services</a></li>
                 <li><a href="hosting">Hosting</a></li>
-                <li><a href="quote">Request a Quote</a></li>
-                <li><a href="contact">Contact Us</a></li>
+                <li><a href="quote">Quote</a></li>
+                <li><a href="contact">Contact</a></li>
             </ul>
         </div>
     </header>
 
-    <section class="hero" id="home">
+    <!-- Hero -->
+    <section class="hero hero-grid-bg">
         <div class="container hero-container">
             <div class="hero-content">
-                <p>Web Services By Kevin Fele - Transform your digital presence with custom website packages tailored to your business needs</p>
+                <div class="announcement-badge">
+                    <i class="fas fa-microchip"></i> SAME COMMUNITY. BIGGER VISION.
+                </div>
+                <h1>Digital Infrastructure<br>For The Modern Age</h1>
+                <p>Web development, cloud hosting, and e-sports infrastructure — engineered with precision by Kevin Fele.</p>
                 <div class="hero-btns">
-                    <a href="services" class="btn">View Packages</a>
-                    <a href="contact" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Get Custom Quote</a>
+                    <a href="services" class="btn btn-outline-accent">View Packages →</a>
+                    <a href="https://wa.me/2764267368" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Start a Project</a>
                 </div>
             </div>
             <div class="hero-image">
                 <div class="industrial-terminal-graphic">
                     <div class="structural-x">
-                        <div class="x-beam x-beam-1"></div>
-                        <div class="x-beam x-beam-2"></div>
-                        <div class="rivet rivet-1"></div>
-                        <div class="rivet rivet-2"></div>
-                        <div class="rivet rivet-3"></div>
-                        <div class="rivet rivet-4"></div>
-                        <div class="rivet rivet-5"></div>
-                        <div class="crosshair-center"></div>
+                        <div class="x-beam-1"></div>
+                        <div class="x-beam-2"></div>
                     </div>
-                    
-                    <div class="scan-lines"></div>
-                    
                     <div class="terminal-overlay">
-                        <div class="command-line">
-                            <span class="prompt">$</span>
-                            <span class="command">build --factorx --production</span>
-                            <span class="cursor">_</span>
-                        </div>
-                        <div class="status-line">
-                            <span class="status-tag">[SYSTEM]</span>
-                            <span class="status-text">Web services online</span>
-                        </div>
-                        <div class="progress-indicator">
-                            <div class="progress-bar"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="warning-label warning-1">CAUTION</div>
-                    <div class="warning-label warning-2">HIGH VOLTAGE</div>
-                    <div class="hex-pattern"></div>
-                    <div class="motherboard-trace"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="portfolio-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Recent Work</h2>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <div class="website-badge">Live</div>
-                        <img src="assets/images/eatery-preview.jpeg" alt="Eatery at Flamingo Website">
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>Eatery at Flamingo</h3>
-                        <p>A beautiful restaurant website featuring menu display, reservation system, and gallery showcasing their delicious food and elegant ambiance.</p>
-                        <a href="https://eateryatflamingo.co.za" class="portfolio-link" target="_blank">Visit Website →</a>
-                        <div class="testimonial">
-                            "Perfect! "
-                            <div class="testimonial-author">- Bra David, Eatery at Flamingo</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <div class="website-badge">Live</div>
-                        <img src="assets/images/arukah-preview.jpeg" alt="Arukah Kagiso Website">
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>Arukah Kagiso</h3>
-                        <p>A community-focused website for Arukah Kagiso, featuring event information, resources, and community engagement features.</p>
-                        <a href="https://arukahkagiso.co.za" class="portfolio-link" target="_blank">Visit Website →</a>
-                        <div class="testimonial">
-                            "Thank you for your beautiful work, may God continue to Bless the work of your hands. Big UP's to Black excellence."
-                            <div class="testimonial-author">- MaQwabe, Arukah Kagiso</div>
-                        </div>
+                        <div class="command-line"><span class="prompt">$</span> npx factorx --deploy</div>
+                        <div class="command-line"><span class="prompt">></span> system ready <span class="cursor">_</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="mini-packages">
+    <!-- Meet Kevin / Founder -->
+    <section class="founder-section">
+        <div class="container">
+            <div class="founder-grid">
+                <div class="founder-image">
+                    <img src="kevin.jpg" alt="Kevin Fele" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?background=25D366&color=fff&name=Kevin+Fele'">
+                    <div class="social-links">
+                        <a href="https://instagram.com/kevinfele" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="follow-btn" onclick="window.open('https://instagram.com/kevinfele','_blank')"><i class="fab fa-instagram"></i> Follow</a>
+                        <a href="https://wa.me/2764267368" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://github.com/kevinfele" class="social-icon"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <div class="degree-badge"><i class="fas fa-graduation-cap"></i> BSc (Applied Math & Computer Science)</div>
+                    <h2 style="font-size: 2rem; margin-bottom: 12px;">Kevin Fele</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Founder & Principal Architect — FactorX Studios</p>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">Building high-performance digital ecosystems. From web architecture to competitive gaming infrastructure — I blend mathematical modeling with clean code to deliver solutions that don't just work, they dominate.</p>
+                </div>
+            </div>
+
+            <!-- EA FC 26 E-Sports -->
+            <div class="esport-card">
+                <i class="fas fa-trophy" style="font-size: 2.5rem; color: #FFD700;"></i>
+                <h3 style="margin: 16px 0 10px;">EA FC 26 — Official Qualifiers</h3>
+                <p style="color: var(--text-secondary);">Get ready for the ultimate digital pitch. Prize pool, leaderboards, and regional finals.</p>
+                <div class="coming-soon">⚡ COMING SOON ⚡</div>
+                <button class="btn btn-outline-accent" style="margin-top: 24px;" onclick="alert('Register interest on WhatsApp 076 426 7368')"><i class="fab fa-whatsapp"></i> Notify Me</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Packages -->
+    <section style="padding: 80px 0;">
         <div class="container">
             <div class="section-title">
-                <h2>Featured Website Packages</h2>
+                <h2>Featured Packages</h2>
             </div>
             <div class="packages-grid">
                 <div class="package-card">
                     <div class="package-header">
-                        <h3 class="package-name">STARTER PACKAGE</h3>
-                        <div class="package-price">from R4950</div>
-                        <div class="package-deposit">50% Deposit Required On Start Date</div>
+                        <h3 class="package-name">STARTER</h3>
+                        <div class="package-price">R4,950</div>
+                        <div class="package-deposit">50% deposit required</div>
                     </div>
                     <div class="package-features">
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Content Management System (CMS)</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>2 - 3 Pages</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Responsive Design</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>FREE SSL Certificate</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Design & Layout R2200</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Includes Stock Images</span>
-                        </div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> 2-3 Pages + CMS</div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> Responsive Design</div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> FREE SSL Certificate</div>
                     </div>
                     <div class="package-cta">
-                        <a href="contact" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> CONTACT US</a>
+                        <a href="https://wa.me/2764267368?text=Hi%20Kevin,%20I'm%20interested%20in%20the%20STARTER%20package" class="btn btn-whatsapp" style="width:100%;"><i class="fab fa-whatsapp"></i> Enquire Now</a>
                     </div>
                 </div>
-
                 <div class="package-card">
                     <div class="package-header">
-                        <h3 class="package-name">STARTER PRO</h3>
-                        <div class="package-price">from R5900</div>
-                        <div class="package-deposit">50% Deposit Required On Start Date</div>
+                        <h3 class="package-name">BUSINESS</h3>
+                        <div class="package-price">R12,800</div>
+                        <div class="package-deposit">50% deposit required</div>
                     </div>
                     <div class="package-features">
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Content Management System (CMS)</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>3 - 4 Pages</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Responsive Design</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>FREE SSL Certificate</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Design & Layout R2200</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Includes Stock Images</span>
-                        </div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> 13 Pages</div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> E-commerce Ready</div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> Priority Support</div>
                     </div>
                     <div class="package-cta">
-                        <a href="contact" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> CONTACT US</a>
+                        <a href="https://wa.me/2764267368?text=Hi%20Kevin,%20I'm%20interested%20in%20the%20BUSINESS%20package" class="btn btn-whatsapp" style="width:100%;"><i class="fab fa-whatsapp"></i> Enquire Now</a>
                     </div>
                 </div>
-
                 <div class="package-card">
                     <div class="package-header">
-                        <h3 class="package-name">START-UP BUSINESS</h3>
-                        <div class="package-price">from R7800</div>
-                        <div class="package-deposit">50% Deposit Required On Start Date</div>
+                        <h3 class="package-name">ADVANCED</h3>
+                        <div class="package-price">R19,200</div>
+                        <div class="package-deposit">50% deposit required</div>
                     </div>
                     <div class="package-features">
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Content Management System (CMS)</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>6 Pages</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Responsive Design</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>FREE SSL Certificate</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Design & Layout R2200</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Includes Stock Images</span>
-                        </div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> 18+ Pages</div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> Custom API Integration</div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> 24/7 SLA Support</div>
                     </div>
                     <div class="package-cta">
-                        <a href="contact" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> CONTACT US</a>
+                        <a href="https://wa.me/2764267368?text=Hi%20Kevin,%20I'm%20interested%20in%20the%20ADVANCED%20package" class="btn btn-whatsapp" style="width:100%;"><i class="fab fa-whatsapp"></i> Enquire Now</a>
                     </div>
                 </div>
             </div>
-            
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="services" class="btn">View All Packages</a>
+            <div style="text-align: center; margin-top: 48px;">
+                <a href="services" class="btn">View All Packages →</a>
             </div>
         </div>
     </section>
 
+    <!-- CTA -->
     <section class="cta-section">
         <div class="container">
-            <h2>Ready to Transform Your Online Presence?</h2>
-            <p>Contact us today for a free consultation and custom quote</p>
+            <h2>Ready to Transform Your Digital Presence?</h2>
+            <p style="color: var(--text-secondary);">Let's build something extraordinary together.</p>
             <div class="cta-btns">
-                <a href="contact" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+                <a href="https://wa.me/2764267368" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
                 <a href="quote" class="btn">Get Custom Quote</a>
             </div>
         </div>
@@ -263,20 +179,15 @@
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="assets/images/logo.png" alt="FactorX Studios" class="footer-logo-img">
-                </div>
-                <div class="footer-links">
-                    <a href="/">Home</a>
-                    <a href="services">Our Services</a>
-                    <a href="hosting">Hosting</a>
-                    <a href="quote">Request a Quote</a>
-                    <a href="contact">Contact Us</a>
-                </div>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="services">Services</a>
+                <a href="hosting">Hosting</a>
+                <a href="quote">Quote</a>
+                <a href="contact">Contact</a>
             </div>
             <div class="copyright">
-                &copy; 2025 <span class="factorx">Factor</span> Studios. All rights reserved.
+                &copy; 2025 Kevin Fele — FactorX Studios | BSc (Applied Math & Computer Science)
             </div>
         </div>
     </footer>
@@ -284,4 +195,3 @@
     <script src="js/script.js"></script>
 </body>
 </html>
-

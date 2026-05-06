@@ -4,41 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | FactorX Studios</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F47J6SVWNN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-F47J6SVWNN');
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container nav-container">
             <a href="/" class="logo">
-                <img src="assets/images/logo.png" alt="FactorX Studios" class="logo-img">
+                <img src="assets/images/logo.png" alt="FactorX Studios" class="logo-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'logo-text\'><strong>FactorX</strong> Studios</span>'">
             </a>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
-                <li><a href="services">Our Services</a></li>
+                <li><a href="services">Services</a></li>
                 <li><a href="hosting">Hosting</a></li>
-                <li><a href="quote">Request a Quote</a></li>
-                <li><a href="contact" class="active">Contact Us</a></li>
+                <li><a href="quote">Quote</a></li>
+                <li><a href="contact" class="active">Contact</a></li>
             </ul>
-            <button class="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button class="mobile-menu"><i class="fas fa-bars"></i></button>
         </div>
-        
-        <!-- Mobile Navigation -->
         <div class="mobile-nav">
             <ul class="mobile-nav-links">
                 <li><a href="/">Home</a></li>
-                <li><a href="services">Our Services</a></li>
+                <li><a href="services">Services</a></li>
                 <li><a href="hosting">Hosting</a></li>
-                <li><a href="quote">Request a Quote</a></li>
-                <li><a href="contact" class="active">Contact Us</a></li>
+                <li><a href="quote">Quote</a></li>
+                <li><a href="contact">Contact</a></li>
             </ul>
         </div>
     </header>
 
-    <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1>Contact Us</h1>
@@ -46,51 +52,59 @@
         </div>
     </section>
 
-    <!-- Contact Methods -->
     <section class="contact-section">
         <div class="container">
-            <h2>Get In Touch</h2>
-            <p>Choose your preferred method to contact us</p>
             <div class="contact-methods">
-                <div class="contact-method whatsapp">
+                <div class="contact-method">
                     <i class="fab fa-whatsapp"></i>
                     <h3>WhatsApp</h3>
-                    <p>078 039 1848</p>
-                    <a href="https://wa.me/27780391848" class="btn btn-whatsapp" target="_blank">Message Us</a>
+                    <p>076 426 7368</p>
+                    <a href="https://wa.me/2764267368" class="btn btn-whatsapp" target="_blank">Message Kevin</a>
                 </div>
                 <div class="contact-method">
-                    <i class="fas fa-phone"></i>
-                    <h3>Call Us</h3>
-                    <p>078 039 1848</p>
-                    <a href="tel:0780391848" class="btn">Call Now</a>
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Call / SMS</h3>
+                    <p>076 426 7368</p>
+                    <a href="tel:0764267368" class="btn">Call Now</a>
                 </div>
                 <div class="contact-method">
                     <i class="fas fa-envelope"></i>
-                    <h3>Email Us</h3>
+                    <h3>Email</h3>
                     <p>kevinfele@factorx.co.za</p>
-                    <a href="mailto:info@factorxstudios.com" class="btn">Send Email</a>
+                    <a href="mailto:kevinfele@factorx.co.za" class="btn">Send Email</a>
                 </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="https://instagram.com/kevinfele" target="_blank" style="display: inline-flex; align-items: center; gap: 12px; background: var(--bg-secondary); padding: 12px 28px; border-radius: 50px; text-decoration: none; color: var(--text-primary); border: 1px solid var(--border-color);">
+                    <i class="fab fa-instagram fa-2x" style="color: #E4405F;"></i>
+                    <span style="font-weight: 600;">@kevinfele</span>
+                    <span class="follow-btn" style="margin: 0;">Follow +</span>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <section style="padding: 60px 0; background: var(--bg-secondary);">
+        <div class="container" style="text-align: center;">
+            <img src="kevin.jpg" alt="Kevin Fele" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; margin-bottom: 20px;" onerror="this.src='https://ui-avatars.com/api/?background=25D366&color=fff&name=Kevin'">
+            <h3>Kevin Fele</h3>
+            <div class="degree-badge" style="margin: 12px auto; display: inline-block;">BSc (Applied Math & Computer Science)</div>
+            <p style="max-width: 500px; margin: 20px auto; color: var(--text-secondary);">Founder of FactorX Studios — building digital infrastructure and competitive gaming ecosystems.</p>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="assets/images/logo.png" alt="FactorX Studios" class="footer-logo-img">
-                </div>
-                <div class="footer-links">
-                    <a href="/">Home</a>
-                    <a href="services">Our Services</a>
-                    <a href="hosting">Hosting</a>
-                    <a href="quote">Request a Quote</a>
-                    <a href="contact">Contact Us</a>
-                </div>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="services">Services</a>
+                <a href="hosting">Hosting</a>
+                <a href="quote">Quote</a>
+                <a href="contact">Contact</a>
             </div>
             <div class="copyright">
-                &copy; 2025 <span class="factorx">Factor</span> Studios. All rights reserved.
+                &copy; 2025 Kevin Fele — FactorX Studios | BSc (Applied Math & Computer Science)
             </div>
         </div>
     </footer>

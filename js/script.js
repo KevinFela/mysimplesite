@@ -1,11 +1,9 @@
-// Mobile Menu Toggle and Navigation
+// Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function() {
-    // Remove index.html from URL if present
+    // Fix index.html redirect
     if (window.location.pathname.endsWith('index.html')) {
         const cleanUrl = window.location.origin + '/';
         window.history.replaceState({}, document.title, cleanUrl);
-        
-        // Force redirect if directly accessed
         if (window.location.pathname === '/index.html') {
             window.location.replace(cleanUrl);
         }
@@ -13,13 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const mobileMenu = document.querySelector('.mobile-menu');
     const mobileNav = document.querySelector('.mobile-nav');
-    const navLinks = document.querySelector('.nav-links');
     
-    // Mobile menu toggle
     if (mobileMenu && mobileNav) {
         mobileMenu.addEventListener('click', function() {
             mobileNav.classList.toggle('active');
-            // Toggle menu icon
             const icon = this.querySelector('i');
             if (icon.classList.contains('fa-bars')) {
                 icon.classList.remove('fa-bars');
@@ -30,14 +25,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Close mobile menu when clicking on a link
-        const mobileNavItems = document.querySelectorAll('.mobile-nav-links a');
-        mobileNavItems.forEach(item => {
-            item.addEventListener('click', () => {
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
                 mobileNav.classList.remove('active');
                 const icon = mobileMenu.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
             });
         });
         
@@ -60,8 +55,9 @@ document.addEventListener('DOMContentLoaded', function() {
         logoImg.addEventListener('error', function() {
             this.style.display = 'none';
             const logoLink = document.querySelector('.logo');
-            logoLink.innerHTML = '<span class="factorx">Factor</span> Studios';
-            logoLink.classList.add('logo-text');
+            if (logoLink && !logoLink.querySelector('.logo-text')) {
+                logoLink.innerHTML = '<span class="logo-text"><strong>FactorX</strong> Studios</span>';
+            }
         });
     }
     
@@ -69,15 +65,38 @@ document.addEventListener('DOMContentLoaded', function() {
     if (footerLogoImg) {
         footerLogoImg.addEventListener('error', function() {
             this.style.display = 'none';
-            const footerLogo = document.querySelector('.footer-logo');
-            footerLogo.innerHTML = '<span class="factorx">Factor</span> Studios';
         });
     }
     
-    // Animate elements on scroll
+    // Quote Form Handler (Updated number: 0764267368)
+    const quoteForm = document.getElementById('quoteForm');
+    if (quoteForm) {
+        quoteForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            const message = `New Quote Request:%0A%0AName: ${data.name}%0AEmail: ${data.email}%0APhone: ${data.phone}%0APackage: ${data.package}%0ABudget: ${data.budget}%0AMessage: ${data.message}`;
+            window.open(`https://wa.me/2764267368?text=${message}`, '_blank');
+        });
+    }
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== "#" && href !== "" && href !== "#/" && href !== "#0") {
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
+    
+    // Animate on scroll
     const animateOnScroll = () => {
         const elements = document.querySelectorAll('.package-card, .hosting-card, .contact-method, .domain-item');
-        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -85,10 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, { 
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
         
         elements.forEach(element => {
             element.style.opacity = '0';
@@ -98,65 +114,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
-    // Initialize animations
     animateOnScroll();
     
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                // Close mobile menu if open
-                if (mobileNav && mobileNav.classList.contains('active')) {
-                    mobileNav.classList.remove('active');
-                    const icon = mobileMenu.querySelector('i');
-                    if (icon) {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                }
-                
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-    
-    // Form handling for quote page
-    const quoteForm = document.getElementById('quoteForm');
-    if (quoteForm) {
-        quoteForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Create WhatsApp message
-            const message = `New Quote Request:%0A%0A` +
-                           `Name: ${data.name}%0A` +
-                           `Email: ${data.email}%0A` +
-                           `Phone: ${data.phone}%0A` +
-                           `Package: ${data.package}%0A` +
-                           `Budget: ${data.budget}%0A` +
-                           `Message: ${data.message}`;
-            
-            // Redirect to WhatsApp
-            window.open(`https://wa.me/27780391848?text=${message}`, '_blank');
-        });
-    }
-    
-    // Handle window resize
+    // Fix for window resize
     let resizeTimer;
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            // Re-initialize animations on resize
-            animateOnScroll();
-        }, 250);
+        resizeTimer = setTimeout(animateOnScroll, 250);
     });
 });
 
@@ -165,28 +129,16 @@ function selectPackage(packageName, packagePrice) {
     const packageSelect = document.getElementById('package');
     const budgetSelect = document.getElementById('budget');
     
-    if (packageSelect) {
-        packageSelect.value = packageName;
-    }
-    
+    if (packageSelect) packageSelect.value = packageName;
     if (budgetSelect && packagePrice) {
-        // Set budget based on package price
         const price = parseInt(packagePrice.replace(/[^0-9]/g, ''));
-        if (price < 6000) {
-            budgetSelect.value = 'R5,000 - R10,000';
-        } else if (price < 12000) {
-            budgetSelect.value = 'R10,000 - R20,000';
-        } else {
-            budgetSelect.value = 'R20,000+';
-        }
+        if (price < 6000) budgetSelect.value = 'R5,000 - R10,000';
+        else if (price < 12000) budgetSelect.value = 'R10,000 - R20,000';
+        else budgetSelect.value = 'R20,000+';
     }
     
-    // Scroll to form
     const formSection = document.querySelector('.form-container');
     if (formSection) {
-        formSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
+        formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
