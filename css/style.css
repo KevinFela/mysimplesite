@@ -34,13 +34,11 @@ body {
     padding: 0 24px;
 }
 
-/* Typography */
 h1, h2, h3, h4 {
     font-weight: 700;
     letter-spacing: -0.02em;
 }
 
-/* Header */
 header {
     background-color: var(--bg-primary);
     position: fixed;
@@ -78,7 +76,6 @@ header {
     opacity: 0.9;
 }
 
-/* Fallback logo text if image fails */
 .logo-text {
     font-size: 1.4rem;
     font-weight: 700;
@@ -187,7 +184,6 @@ header {
     padding-left: 12px;
 }
 
-/* Page Header */
 .page-header {
     padding: 140px 0 60px;
     text-align: center;
@@ -209,17 +205,16 @@ header {
 
 .hero {
     padding: 140px 0 90px;
-    background: #ffffff;
+    background: linear-gradient(to bottom, #ffffff, #f8f9fa);
     position: relative;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .hero-grid-bg {
     background-image: 
-        linear-gradient(var(--border-color) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+        linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
     background-size: 40px 40px;
-    opacity: 0.1;
 }
 
 .hero-container {
@@ -262,7 +257,6 @@ header {
     flex-wrap: wrap;
 }
 
-/* Buttons */
 .btn {
     display: inline-block;
     padding: 12px 28px;
@@ -308,7 +302,6 @@ header {
     border-color: var(--accent);
 }
 
-/* Section Titles */
 .section-title {
     text-align: center;
     margin-bottom: 48px;
@@ -332,7 +325,6 @@ header {
     transform: translateX(-50%);
 }
 
-/* Packages Grid */
 .packages-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -409,7 +401,6 @@ header {
     background-color: var(--bg-secondary);
 }
 
-/* Founder Section */
 .founder-section {
     padding: 80px 0;
     background-color: var(--bg-secondary);
@@ -488,7 +479,6 @@ header {
     color: var(--bg-primary);
 }
 
-/* E-Sports Card */
 .esport-card {
     background: linear-gradient(135deg, #f8f9fa, #ffffff);
     border: 1px solid var(--border-color);
@@ -506,7 +496,6 @@ header {
     margin-top: 16px;
 }
 
-/* Hosting Grid */
 .hosting-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -566,7 +555,6 @@ header {
     width: 18px;
 }
 
-/* Domains Grid */
 .domains-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -600,7 +588,6 @@ header {
     font-weight: 600;
 }
 
-/* Form Container */
 .form-container {
     max-width: 700px;
     margin: 0 auto;
@@ -650,7 +637,6 @@ header {
     min-height: 120px;
 }
 
-/* Contact Methods */
 .contact-section {
     padding: 80px 0;
     text-align: center;
@@ -697,7 +683,6 @@ header {
     color: var(--text-primary);
 }
 
-/* CTA Section */
 .cta-section {
     padding: 80px 0;
     background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
@@ -719,7 +704,6 @@ header {
     flex-wrap: wrap;
 }
 
-/* Terminal Graphic (Light Mode) */
 .industrial-terminal-graphic {
     position: relative;
     background: var(--bg-secondary);
@@ -748,8 +732,13 @@ header {
     top: 50%;
 }
 
-.x-beam-1 { transform: translateY(-50%) rotate(45deg); }
-.x-beam-2 { transform: translateY(-50%) rotate(-45deg); }
+.x-beam-1 {
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.x-beam-2 {
+    transform: translateY(-50%) rotate(-45deg);
+}
 
 .terminal-overlay {
     position: absolute;
@@ -782,7 +771,6 @@ header {
     51%, 100% { opacity: 0; }
 }
 
-/* Footer */
 footer {
     background-color: var(--bg-secondary);
     padding: 50px 0 30px;
@@ -814,7 +802,6 @@ footer {
     font-size: 0.8rem;
     color: var(--text-muted);
 }
-
 
 .tech-news-section {
     padding: 80px 0;
@@ -890,6 +877,7 @@ footer {
     line-clamp: 3;
     overflow: hidden;
 }
+
 .news-meta {
     display: flex;
     justify-content: space-between;
@@ -932,7 +920,6 @@ footer {
     color: #dc3545;
 }
 
-/* News section responsiveness */
 @media (max-width: 768px) {
     .tech-news-section {
         padding: 60px 0;
@@ -962,7 +949,6 @@ footer {
     }
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
@@ -1043,41 +1029,4 @@ footer {
     .form-container {
         padding: 24px;
     }
-}
-
-.news-card-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    transition: var(--transition);
-}
-
-.news-card-link:hover .news-card {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--accent);
-}
-
-.news-card-wrapper {
-    display: block;
-}
-
-/* Ensure the card itself doesn't have duplicate hover effects */
-.news-card {
-    transition: var(--transition);
-    cursor: pointer;
-}
-
-/* Remove individual hover from news-card since we handle it on the link */
-.news-card:hover {
-    transform: none;
-}
-
-/* Keep image hover effect optional */
-.news-card-link:hover .news-image {
-    transform: scale(1.02);
-}
-
-.news-image {
-    transition: transform 0.3s ease;
 }
