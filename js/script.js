@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
             const message = `New Quote Request:%0A%0AName: ${data.name}%0AEmail: ${data.email}%0APhone: ${data.phone}%0APackage: ${data.package}%0ABudget: ${data.budget}%0AMessage: ${data.message}`;
-            window.open(`https://wa.me/2764267368?text=${message}`, '_blank');
+            window.open(`https://wa.me/27764267368?text=${message}`, '_blank');
         });
     }
 
