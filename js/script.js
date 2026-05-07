@@ -1,6 +1,5 @@
-// Mobile Menu Toggle & Main Functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Fix index.html redirect
+
     if (window.location.pathname.endsWith('index.html')) {
         const cleanUrl = window.location.origin + '/';
         window.history.replaceState({}, document.title, cleanUrl);
@@ -67,8 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.display = 'none';
         });
     }
-    
-    // Quote Form Handler
+
     const quoteForm = document.getElementById('quoteForm');
     if (quoteForm) {
         quoteForm.addEventListener('submit', function(e) {
@@ -79,8 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.open(`https://wa.me/2764267368?text=${message}`, '_blank');
         });
     }
-    
-    // Smooth scroll for anchor links
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
@@ -123,15 +120,9 @@ document.addEventListener('DOMContentLoaded', function() {
         resizeTimer = setTimeout(animateOnScroll, 250);
     });
     
-    // ============================================
-    // TECH NEWS - WORKING WITH GNEWS API
-    // ============================================
-    
     async function loadTechNews() {
         const newsContainer = document.getElementById('newsContainer');
         if (!newsContainer) return;
-        
-        // Show loading state
         newsContainer.innerHTML = `
             <div class="news-loading">
                 <i class="fas fa-spinner fa-pulse"></i>
@@ -172,9 +163,6 @@ document.addEventListener('DOMContentLoaded', function() {
         newsContainer.innerHTML = '';
         
         articles.forEach(article => {
-            const newsCard = document.createElement('div');
-            newsCard.className = 'news-card';
-            
             // Format date
             let formattedDate = 'Latest News';
             if (article.publishedAt) {
@@ -191,36 +179,39 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log('Date parsing error:', e);
                 }
             }
-            
-            // Get image URL with fallback
+
             let imageUrl = article.image;
             if (!imageUrl || imageUrl === 'null' || imageUrl === 'undefined' || imageUrl === '') {
-                // Use a colored placeholder based on article source
                 const colors = ['25D366', '128C7E', '075E54', '1DA1F2', '4267B2', 'E4405F'];
                 const colorIndex = (article.source?.name || article.title || '').length % colors.length;
                 imageUrl = `https://placehold.co/600x400/${colors[colorIndex]}/ffffff?text=${encodeURIComponent(article.source?.name || 'Tech News')}`;
             }
-            
-            // Get title and description with fallbacks
+  
             const title = article.title || 'Technology News Update';
             const description = article.description || article.content || 'Click to read more about this technology news update.';
             const sourceName = article.source?.name || 'Tech News';
             const articleUrl = article.url || '#';
             
+            // Create the news card with entire card clickable
+            const newsCard = document.createElement('div');
+            newsCard.className = 'news-card-wrapper';
+            
             newsCard.innerHTML = `
-                <img class="news-image" src="${imageUrl}" 
-                     alt="${escapeHtml(title)}" 
-                     onerror="this.src='https://placehold.co/600x400/25D366/ffffff?text=News'">
-                <div class="news-content">
-                    <h3 class="news-title">
-                        <a href="${articleUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>
-                    </h3>
-                    <p class="news-description">${escapeHtml(description.substring(0, 150))}${description.length > 150 ? '...' : ''}</p>
-                    <div class="news-meta">
-                        <span class="news-source"><i class="fas fa-newspaper"></i> ${escapeHtml(sourceName)}</span>
-                        <span class="news-date"><i class="far fa-calendar-alt"></i> ${formattedDate}</span>
+                <a href="${articleUrl}" target="_blank" rel="noopener noreferrer" class="news-card-link">
+                    <div class="news-card">
+                        <img class="news-image" src="${imageUrl}" 
+                             alt="${escapeHtml(title)}" 
+                             onerror="this.src='https://placehold.co/600x400/25D366/ffffff?text=News'">
+                        <div class="news-content">
+                            <h3 class="news-title">${escapeHtml(title)}</h3>
+                            <p class="news-description">${escapeHtml(description.substring(0, 150))}${description.length > 150 ? '...' : ''}</p>
+                            <div class="news-meta">
+                                <span class="news-source"><i class="fas fa-newspaper"></i> ${escapeHtml(sourceName)}</span>
+                                <span class="news-date"><i class="far fa-calendar-alt"></i> ${formattedDate}</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </a>
             `;
             
             newsContainer.appendChild(newsCard);
@@ -250,11 +241,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return div.innerHTML;
     }
     
-    // Load tech news
     loadTechNews();
 });
 
-// Package selection for quote form
+
 function selectPackage(packageName, packagePrice) {
     const packageSelect = document.getElementById('package');
     const budgetSelect = document.getElementById('budget');
