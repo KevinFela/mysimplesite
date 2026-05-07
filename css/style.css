@@ -1048,3 +1048,40 @@ footer {
         padding: 24px;
     }
 }
+
+.news-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: var(--transition);
+}
+
+.news-card-link:hover .news-card {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent);
+}
+
+.news-card-wrapper {
+    display: block;
+}
+
+/* Ensure the card itself doesn't have duplicate hover effects */
+.news-card {
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+/* Remove individual hover from news-card since we handle it on the link */
+.news-card:hover {
+    transform: none;
+}
+
+/* Keep image hover effect optional */
+.news-card-link:hover .news-image {
+    transform: scale(1.02);
+}
+
+.news-image {
+    transition: transform 0.3s ease;
+}
