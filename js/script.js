@@ -124,89 +124,123 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ============================================
-    // TECH NEWS SECTION - Static content (no API needed)
+    // TECH NEWS - WORKING WITH GNEWS API
     // ============================================
     
-    // Static tech news that displays immediately
-    const techNews = [
-        {
-            title: "AI Revolution in Web Development",
-            description: "Artificial intelligence is transforming how websites are built and optimized, making development faster and more efficient than ever before. FactorX Studios stays ahead with cutting-edge AI integration.",
-            source: "Tech Innovation",
-            url: "https://techcrunch.com",
-            image: "https://placehold.co/600x400/25D366/ffffff?text=AI+in+Web+Dev",
-            date: "2025"
-        },
-        {
-            title: "Cybersecurity Best Practices for 2025",
-            description: "Protect your business with the latest cybersecurity strategies. From SSL certificates to secure hosting, learn how to safeguard your digital assets.",
-            source: "Digital Security",
-            url: "https://wired.com",
-            image: "https://placehold.co/600x400/128C7E/ffffff?text=Cyber+Security",
-            date: "2025"
-        },
-        {
-            title: "Cloud Hosting Benefits for Small Business",
-            description: "Scalable cloud solutions help businesses grow without infrastructure headaches. Explore affordable hosting options starting from just R100/month.",
-            source: "Business Tech",
-            url: "https://forbes.com",
-            image: "https://placehold.co/600x400/25D366/ffffff?text=Cloud+Hosting",
-            date: "2025"
-        },
-        {
-            title: "E-Sports: The Future of Competitive Gaming",
-            description: "EA FC 26 qualifiers coming soon! FactorX Studios is building South Africa's premier competitive gaming infrastructure.",
-            source: "Gaming Insider",
-            url: "https://espn.com/esports",
-            image: "https://placehold.co/600x400/128C7E/ffffff?text=E-Sports",
-            date: "2025"
-        },
-        {
-            title: "Mobile-First Design: Why It Matters",
-            description: "Over 60% of web traffic comes from mobile devices. Ensure your website delivers an exceptional experience on every screen size.",
-            source: "Web Design Weekly",
-            url: "https://smashingmagazine.com",
-            image: "https://placehold.co/600x400/25D366/ffffff?text=Mobile+Design",
-            date: "2025"
-        },
-        {
-            title: "Website Speed Affects SEO Rankings",
-            description: "Google prioritizes fast-loading websites. Optimize your site's performance with FactorX Studios' expert development and hosting solutions.",
-            source: "SEO Today",
-            url: "https://searchenginejournal.com",
-            image: "https://placehold.co/600x400/128C7E/ffffff?text=Performance",
-            date: "2025"
+    async function loadTechNews() {
+        const newsContainer = document.getElementById('newsContainer');
+        if (!newsContainer) return;
+        
+        // Show loading state
+        newsContainer.innerHTML = `
+            <div class="news-loading">
+                <i class="fas fa-spinner fa-pulse"></i>
+                Loading latest tech news...
+            </div>
+        `;
+        
+        const API_KEY = '07c103ff7f89f5ba952ec4ff4b7de976';
+        const apiUrl = `https://gnews.io/api/v4/top-headlines?topic=technology&lang=en&max=6&apikey=${API_KEY}`;
+        
+        try {
+            console.log('Fetching news from API...');
+            const response = await fetch(apiUrl);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            console.log('API Response:', data);
+            
+            // Check if we have articles in the response
+            if (data.articles && data.articles.length > 0) {
+                displayNews(data.articles);
+            } else {
+                throw new Error('No articles found in response');
+            }
+        } catch (error) {
+            console.error('Error fetching tech news:', error);
+            showErrorMessage();
         }
-    ];
+    }
     
-    function displayTechNews() {
+    function displayNews(articles) {
         const newsContainer = document.getElementById('newsContainer');
         if (!newsContainer) return;
         
         newsContainer.innerHTML = '';
         
-        techNews.forEach(news => {
+        articles.forEach(article => {
             const newsCard = document.createElement('div');
             newsCard.className = 'news-card';
             
+            // Format date
+            let formattedDate = 'Latest News';
+            if (article.publishedAt) {
+                try {
+                    const publishDate = new Date(article.publishedAt);
+                    if (!isNaN(publishDate.getTime())) {
+                        formattedDate = publishDate.toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric'
+                        });
+                    }
+                } catch(e) {
+                    console.log('Date parsing error:', e);
+                }
+            }
+            
+            // Get image URL with fallback
+            let imageUrl = article.image;
+            if (!imageUrl || imageUrl === 'null' || imageUrl === 'undefined' || imageUrl === '') {
+                // Use a colored placeholder based on article source
+                const colors = ['25D366', '128C7E', '075E54', '1DA1F2', '4267B2', 'E4405F'];
+                const colorIndex = (article.source?.name || article.title || '').length % colors.length;
+                imageUrl = `https://placehold.co/600x400/${colors[colorIndex]}/ffffff?text=${encodeURIComponent(article.source?.name || 'Tech News')}`;
+            }
+            
+            // Get title and description with fallbacks
+            const title = article.title || 'Technology News Update';
+            const description = article.description || article.content || 'Click to read more about this technology news update.';
+            const sourceName = article.source?.name || 'Tech News';
+            const articleUrl = article.url || '#';
+            
             newsCard.innerHTML = `
-                <img class="news-image" src="${news.image}" 
-                     alt="${escapeHtml(news.title)}" 
-                     onerror="this.src='https://placehold.co/600x400/25D366/ffffff?text=Tech+News'">
+                <img class="news-image" src="${imageUrl}" 
+                     alt="${escapeHtml(title)}" 
+                     onerror="this.src='https://placehold.co/600x400/25D366/ffffff?text=News'">
                 <div class="news-content">
                     <h3 class="news-title">
-                        <a href="${news.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(news.title)}</a>
+                        <a href="${articleUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>
                     </h3>
-                    <p class="news-description">${escapeHtml(news.description)}</p>
+                    <p class="news-description">${escapeHtml(description.substring(0, 150))}${description.length > 150 ? '...' : ''}</p>
                     <div class="news-meta">
-                        <span class="news-source"><i class="fas fa-newspaper"></i> ${escapeHtml(news.source)}</span>
-                        <span class="news-date"><i class="far fa-calendar-alt"></i> ${news.date}</span>
+                        <span class="news-source"><i class="fas fa-newspaper"></i> ${escapeHtml(sourceName)}</span>
+                        <span class="news-date"><i class="far fa-calendar-alt"></i> ${formattedDate}</span>
                     </div>
                 </div>
             `;
             
             newsContainer.appendChild(newsCard);
         });
+    }
+    
+    function showErrorMessage() {
+        const newsContainer = document.getElementById('newsContainer');
+        if (!newsContainer) return;
+        
+        newsContainer.innerHTML = `
+            <div class="news-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Unable to load live news at the moment.</p>
+                <p style="font-size: 0.85rem; margin-top: 10px;">Please check your internet connection or try again later.</p>
+                <button onclick="location.reload()" class="btn" style="margin-top: 20px;">
+                    <i class="fas fa-sync-alt"></i> Try Again
+                </button>
+            </div>
+        `;
     }
     
     function escapeHtml(text) {
@@ -216,8 +250,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return div.innerHTML;
     }
     
-    // Display tech news immediately
-    displayTechNews();
+    // Load tech news
+    loadTechNews();
 });
 
 // Package selection for quote form
