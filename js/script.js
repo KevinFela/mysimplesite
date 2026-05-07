@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Quote Form Handler
+    // Quote Form Handler (Updated number: 0764267368)
     const quoteForm = document.getElementById('quoteForm');
     if (quoteForm) {
         quoteForm.addEventListener('submit', function(e) {
@@ -124,63 +124,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ============================================
-    // TECH NEWS - WORKING WITH CORS PROXY
+    // TECH NEWS FUNCTION - Integrated here
     // ============================================
     
     async function loadTechNews() {
         const newsContainer = document.getElementById('newsContainer');
         if (!newsContainer) return;
         
-        // Show loading state
-        newsContainer.innerHTML = `
-            <div class="news-loading">
-                <i class="fas fa-spinner fa-pulse"></i>
-                Loading latest tech news...
-            </div>
-        `;
-        
         const API_KEY = '07c103ff7f89f5ba952ec4ff4b7de976';
-        // Use a CORS proxy to bypass CORS restrictions
-        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-        const apiUrl = `https://gnews.io/api/v4/top-headlines?topic=technology&lang=en&max=6&apikey=${API_KEY}`;
+        const url = `https://gnews.io/api/v4/top-headlines?topic=technology&lang=en&max=6&apikey=${API_KEY}`;
         
         try {
-            // Try with CORS proxy first
-            const response = await fetch(proxyUrl + apiUrl, {
-                headers: {
-                    'Origin': window.location.origin,
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            });
+            const response = await fetch(url);
             
-            if (response.ok) {
-                const data = await response.json();
-                if (data.articles && data.articles.length > 0) {
-                    displayNews(data.articles);
-                    return;
-                }
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-            throw new Error('Proxy fetch failed');
             
+            const data = await response.json();
+            
+            if (data.articles && data.articles.length > 0) {
+                displayNews(data.articles);
+            } else {
+                showNewsError('No news articles found at the moment.');
+            }
         } catch (error) {
-            console.log('Proxy failed, trying direct fetch:', error);
-            
-            // Try direct fetch (might work on some browsers)
-            try {
-                const directResponse = await fetch(apiUrl);
-                if (directResponse.ok) {
-                    const data = await directResponse.json();
-                    if (data.articles && data.articles.length > 0) {
-                        displayNews(data.articles);
-                        return;
-                    }
-                }
-                throw new Error('Direct fetch failed');
-            } catch (directError) {
-                console.log('All fetch methods failed:', directError);
-                // If all fails, show a message and use fallback
-                showApiErrorMessage();
-            }
+            console.error('Error fetching tech news:', error);
+            showNewsError('Unable to load tech news. Please try again later.');
         }
     }
     
@@ -202,17 +172,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 year: 'numeric'
             });
             
-            // Handle missing images
-            let imageUrl = article.image;
-            if (!imageUrl || imageUrl === 'null' || imageUrl === 'undefined') {
-                const color = Math.floor(Math.random() * 16777215).toString(16);
-                imageUrl = `https://via.placeholder.com/600x400/${color}/ffffff?text=${encodeURIComponent(article.source.name || 'Tech News')}`;
-            }
-            
             newsCard.innerHTML = `
-                <img class="news-image" src="${imageUrl}" 
+                <img class="news-image" src="${article.image || 'https://placehold.co/600x400/e0e0e0/666666?text=Tech+News'}" 
                      alt="${escapeHtml(article.title)}" 
-                     onerror="this.src='https://via.placeholder.com/600x400/25D366/ffffff?text=News'">
+                     onerror="this.src='https://placehold.co/600x400/e0e0e0/666666?text=Tech+News'">
                 <div class="news-content">
                     <h3 class="news-title">
                         <a href="${article.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
@@ -229,15 +192,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    function showApiErrorMessage() {
+    function showNewsError(message) {
         const newsContainer = document.getElementById('newsContainer');
         if (!newsContainer) return;
         
         newsContainer.innerHTML = `
             <div class="news-error">
                 <i class="fas fa-exclamation-triangle"></i>
-                <p>Unable to load live news due to CORS restrictions.</p>
-                <p style="font-size: 0.85rem; margin-top: 10px;">For live news integration, a backend proxy is required.</p>
+                <p>${message}</p>
                 <button onclick="location.reload()" class="btn" style="margin-top: 20px;">
                     <i class="fas fa-sync-alt"></i> Try Again
                 </button>
@@ -252,11 +214,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return div.innerHTML;
     }
     
-    // Load tech news
+    // Load tech news when page loads
     loadTechNews();
 });
 
-// Package selection for quote form
+// Package selection for quote form (kept outside DOMContentLoaded for global access)
 function selectPackage(packageName, packagePrice) {
     const packageSelect = document.getElementById('package');
     const budgetSelect = document.getElementById('budget');
