@@ -1,4 +1,4 @@
-
+// Mobile Menu Toggle & Main Functionality
 document.addEventListener('DOMContentLoaded', function() {
     // Fix index.html redirect
     if (window.location.pathname.endsWith('index.html')) {
@@ -124,33 +124,113 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ============================================
-    // TECH NEWS FUNCTION - Integrated here
+    // TECH NEWS FUNCTION - Fixed with better error handling and fallback
     // ============================================
+    
+    // Fallback news data in case API fails
+    const fallbackNews = [
+        {
+            title: "AI Revolution in Web Development",
+            description: "Artificial intelligence is transforming how websites are built and optimized, making development faster and more efficient than ever before.",
+            source: "TechCrunch",
+            url: "https://techcrunch.com",
+            image: "https://placehold.co/600x400/25D366/ffffff?text=AI+News",
+            publishedAt: new Date().toISOString()
+        },
+        {
+            title: "Cybersecurity Trends 2025",
+            description: "New cybersecurity threats emerge as businesses accelerate digital transformation. Learn how to protect your digital assets.",
+            source: "Wired",
+            url: "https://wired.com",
+            image: "https://placehold.co/600x400/128C7E/ffffff?text=Cyber+Security",
+            publishedAt: new Date().toISOString()
+        },
+        {
+            title: "Cloud Computing Growth",
+            description: "Cloud adoption continues to surge as companies seek scalable solutions for their growing digital needs.",
+            source: "Forbes",
+            url: "https://forbes.com",
+            image: "https://placehold.co/600x400/25D366/ffffff?text=Cloud+Computing",
+            publishedAt: new Date().toISOString()
+        },
+        {
+            title: "E-Sports Industry Boom",
+            description: "Competitive gaming reaches new heights with record viewership and prize pools in 2025.",
+            source: "ESPN",
+            url: "https://espn.com/esports",
+            image: "https://placehold.co/600x400/128C7E/ffffff?text=E-Sports",
+            publishedAt: new Date().toISOString()
+        },
+        {
+            title: "Mobile First Design",
+            description: "Mobile optimization becomes crucial as more users access websites through smartphones and tablets.",
+            source: "Smashing Magazine",
+            url: "https://smashingmagazine.com",
+            image: "https://placehold.co/600x400/25D366/ffffff?text=Mobile+Design",
+            publishedAt: new Date().toISOString()
+        },
+        {
+            title: "Web Performance Optimization",
+            description: "Site speed and user experience drive SEO rankings and conversion rates in today's competitive market.",
+            source: "Search Engine Journal",
+            url: "https://searchenginejournal.com",
+            image: "https://placehold.co/600x400/128C7E/ffffff?text=Performance",
+            publishedAt: new Date().toISOString()
+        }
+    ];
     
     async function loadTechNews() {
         const newsContainer = document.getElementById('newsContainer');
         if (!newsContainer) return;
         
-        const API_KEY = '07c103ff7f89f5ba952ec4ff4b7de976';
-        const url = `https://gnews.io/api/v4/top-headlines?topic=technology&lang=en&max=6&apikey=${API_KEY}`;
+        // Show loading state
+        newsContainer.innerHTML = `
+            <div class="news-loading">
+                <i class="fas fa-spinner fa-pulse"></i>
+                Loading latest tech news...
+            </div>
+        `;
         
-        try {
-            const response = await fetch(url);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+        const API_KEY = '07c103ff7f89f5ba952ec4ff4b7de976';
+        // Try multiple news API endpoints
+        const apiUrls = [
+            `https://gnews.io/api/v4/top-headlines?topic=technology&lang=en&max=6&apikey=${API_KEY}`,
+            `https://gnews.io/api/v4/search?q=technology&lang=en&max=6&apikey=${API_KEY}`
+        ];
+        
+        let newsData = null;
+        
+        // Try each API endpoint
+        for (const url of apiUrls) {
+            try {
+                console.log('Trying to fetch from:', url);
+                const response = await fetch(url);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.articles && data.articles.length > 0) {
+                        newsData = data.articles;
+                        console.log('Successfully fetched news from API');
+                        break;
+                    }
+                }
+            } catch (error) {
+                console.log('API fetch failed:', error);
+                continue;
             }
-            
-            const data = await response.json();
-            
-            if (data.articles && data.articles.length > 0) {
-                displayNews(data.articles);
-            } else {
-                showNewsError('No news articles found at the moment.');
-            }
-        } catch (error) {
-            console.error('Error fetching tech news:', error);
-            showNewsError('Unable to load tech news. Please try again later.');
+        }
+        
+        // If API returns data, use it; otherwise use fallback
+        if (newsData && newsData.length > 0) {
+            displayNews(newsData);
+        } else {
+            console.log('Using fallback news data');
+            displayNews(fallbackNews);
+            // Show a subtle notice that using fallback data
+            const notice = document.createElement('div');
+            notice.style.cssText = 'text-align: center; margin-top: 20px; font-size: 0.8rem; color: var(--text-muted);';
+            notice.innerHTML = '<i class="fas fa-info-circle"></i> Showing sample tech news. Live updates will appear when available.';
+            newsContainer.parentNode.appendChild(notice);
         }
     }
     
@@ -166,23 +246,33 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Format date
             const publishDate = new Date(article.publishedAt);
-            const formattedDate = publishDate.toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric'
-            });
+            const formattedDate = !isNaN(publishDate.getTime()) ? 
+                publishDate.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                }) : 'Latest News';
+            
+            // Get image URL with fallback
+            let imageUrl = article.image;
+            if (!imageUrl || imageUrl === 'null' || imageUrl === 'undefined' || imageUrl === '') {
+                // Generate a consistent color based on title
+                const colors = ['25D366', '128C7E', '075E54', '1DA1F2', '4267B2', 'E4405F'];
+                const colorIndex = (article.title || '').length % colors.length;
+                imageUrl = `https://placehold.co/600x400/${colors[colorIndex]}/ffffff?text=${encodeURIComponent(article.source?.name || 'Tech News')}`;
+            }
             
             newsCard.innerHTML = `
-                <img class="news-image" src="${article.image || 'https://placehold.co/600x400/e0e0e0/666666?text=Tech+News'}" 
-                     alt="${escapeHtml(article.title)}" 
-                     onerror="this.src='https://placehold.co/600x400/e0e0e0/666666?text=Tech+News'">
+                <img class="news-image" src="${imageUrl}" 
+                     alt="${escapeHtml(article.title || 'Tech News')}" 
+                     onerror="this.src='https://placehold.co/600x400/25D366/ffffff?text=Tech+News'">
                 <div class="news-content">
                     <h3 class="news-title">
-                        <a href="${article.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
+                        <a href="${article.url || '#'}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title || 'Technology Update')}</a>
                     </h3>
-                    <p class="news-description">${escapeHtml(article.description || 'Click to read more about this technology news update.')}</p>
+                    <p class="news-description">${escapeHtml(article.description || article.content || 'Click to read more about this technology news update.')}</p>
                     <div class="news-meta">
-                        <span class="news-source"><i class="fas fa-newspaper"></i> ${escapeHtml(article.source.name || 'Tech News')}</span>
+                        <span class="news-source"><i class="fas fa-newspaper"></i> ${escapeHtml(article.source?.name || 'Tech News')}</span>
                         <span class="news-date"><i class="far fa-calendar-alt"></i> ${formattedDate}</span>
                     </div>
                 </div>
@@ -192,25 +282,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    function showNewsError(message) {
-        const newsContainer = document.getElementById('newsContainer');
-        if (!newsContainer) return;
-        
-        newsContainer.innerHTML = `
-            <div class="news-error">
-                <i class="fas fa-exclamation-triangle"></i>
-                <p>${message}</p>
-                <button onclick="location.reload()" class="btn" style="margin-top: 20px;">
-                    <i class="fas fa-sync-alt"></i> Try Again
-                </button>
-            </div>
-        `;
-    }
-    
     function escapeHtml(text) {
         if (!text) return '';
         const div = document.createElement('div');
-        div.textContent = text;
+        div.textContent = text.substring(0, 200); // Limit text length
         return div.innerHTML;
     }
     
