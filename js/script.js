@@ -1,4 +1,4 @@
-// Mobile Menu Toggle
+
 document.addEventListener('DOMContentLoaded', function() {
     // Fix index.html redirect
     if (window.location.pathname.endsWith('index.html')) {
@@ -122,9 +122,103 @@ document.addEventListener('DOMContentLoaded', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(animateOnScroll, 250);
     });
+    
+    // ============================================
+    // TECH NEWS FUNCTION - Integrated here
+    // ============================================
+    
+    async function loadTechNews() {
+        const newsContainer = document.getElementById('newsContainer');
+        if (!newsContainer) return;
+        
+        const API_KEY = '07c103ff7f89f5ba952ec4ff4b7de976';
+        const url = `https://gnews.io/api/v4/top-headlines?topic=technology&lang=en&max=6&apikey=${API_KEY}`;
+        
+        try {
+            const response = await fetch(url);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (data.articles && data.articles.length > 0) {
+                displayNews(data.articles);
+            } else {
+                showNewsError('No news articles found at the moment.');
+            }
+        } catch (error) {
+            console.error('Error fetching tech news:', error);
+            showNewsError('Unable to load tech news. Please try again later.');
+        }
+    }
+    
+    function displayNews(articles) {
+        const newsContainer = document.getElementById('newsContainer');
+        if (!newsContainer) return;
+        
+        newsContainer.innerHTML = '';
+        
+        articles.forEach(article => {
+            const newsCard = document.createElement('div');
+            newsCard.className = 'news-card';
+            
+            // Format date
+            const publishDate = new Date(article.publishedAt);
+            const formattedDate = publishDate.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+            
+            newsCard.innerHTML = `
+                <img class="news-image" src="${article.image || 'https://placehold.co/600x400/e0e0e0/666666?text=Tech+News'}" 
+                     alt="${escapeHtml(article.title)}" 
+                     onerror="this.src='https://placehold.co/600x400/e0e0e0/666666?text=Tech+News'">
+                <div class="news-content">
+                    <h3 class="news-title">
+                        <a href="${article.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(article.title)}</a>
+                    </h3>
+                    <p class="news-description">${escapeHtml(article.description || 'Click to read more about this technology news update.')}</p>
+                    <div class="news-meta">
+                        <span class="news-source"><i class="fas fa-newspaper"></i> ${escapeHtml(article.source.name || 'Tech News')}</span>
+                        <span class="news-date"><i class="far fa-calendar-alt"></i> ${formattedDate}</span>
+                    </div>
+                </div>
+            `;
+            
+            newsContainer.appendChild(newsCard);
+        });
+    }
+    
+    function showNewsError(message) {
+        const newsContainer = document.getElementById('newsContainer');
+        if (!newsContainer) return;
+        
+        newsContainer.innerHTML = `
+            <div class="news-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>${message}</p>
+                <button onclick="location.reload()" class="btn" style="margin-top: 20px;">
+                    <i class="fas fa-sync-alt"></i> Try Again
+                </button>
+            </div>
+        `;
+    }
+    
+    function escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    // Load tech news when page loads
+    loadTechNews();
 });
 
-// Package selection for quote form
+// Package selection for quote form (kept outside DOMContentLoaded for global access)
 function selectPackage(packageName, packagePrice) {
     const packageSelect = document.getElementById('package');
     const budgetSelect = document.getElementById('budget');
