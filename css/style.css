@@ -207,12 +207,11 @@ header {
     margin: 0 auto;
 }
 
-/* Hero Section */
 .hero {
     padding: 140px 0 90px;
-    background-color: var(--bg-secondary);
+    background: #ffffff;
     position: relative;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .hero-grid-bg {
