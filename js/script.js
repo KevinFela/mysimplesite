@@ -34,8 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-        
-        // Close mobile menu when clicking outside
+  
         document.addEventListener('click', function(event) {
             if (!event.target.closest('.nav-container') && !event.target.closest('.mobile-nav')) {
                 mobileNav.classList.remove('active');
@@ -47,8 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
-    // Logo fallback handling
+
     const logoImg = document.querySelector('.logo-img');
     if (logoImg) {
         logoImg.addEventListener('error', function() {
@@ -90,8 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
-    // Animate on scroll
+
     const animateOnScroll = () => {
         const elements = document.querySelectorAll('.package-card, .hosting-card, .contact-method, .domain-item');
         const observer = new IntersectionObserver((entries) => {
@@ -112,8 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     animateOnScroll();
-    
-    // Fix for window resize
+
     let resizeTimer;
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
@@ -143,8 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const data = await response.json();
             console.log('API Response:', data);
-            
-            // Check if we have articles in the response
+       
             if (data.articles && data.articles.length > 0) {
                 displayNews(data.articles);
             } else {
